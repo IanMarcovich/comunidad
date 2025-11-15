@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donaciones - YAG3R</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="loading">
+    <!-- Pantalla de Carga -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <h1>YAG3R</h1>
+            </div>
+            <div class="loader-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="index.html">YAG3R</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#acerca">Acerca</a></li>
+                <li><a href="index.html#juegos">Juegos</a></li>
+                <li><a href="index.html#streamers">Streamers</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="donaciones.html" class="active">Donaciones</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+                <li><a href="#" class="discord-nav-btn" id="discordNavBtn"><i class="fab fa-discord"></i> Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero de Donaciones -->
+    <section class="donations-hero">
+        <div class="donations-hero-background"></div>
+        <div class="container">
+            <div class="donations-hero-content">
+                <h1 class="donations-title" data-text="APOYA YAG3R">APOYA YAG3R</h1>
+                <p class="donations-subtitle">Tu apoyo nos ayuda a mantener y mejorar la comunidad</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donaciones -->
+    <section class="donations-main">
+        <div class="container">
+            <h2 class="section-title">¡Gracias por ser parte de esta increíble familia gamer!</h2>
+            <div class="donations-grid">
+                <!-- PayPal Card -->
+                <div class="donation-card">
+                    <div class="donation-header">
+                        <i class="fab fa-paypal"></i>
+                        <h3>PayPal</h3>
+                    </div>
+                    <div class="donation-body">
+                        <p>Dona de forma segura con PayPal</p>
+                        <div class="amount-selector">
+                            <button class="amount-btn" data-amount="5">$5</button>
+                            <button class="amount-btn" data-amount="10">$10</button>
+                            <button class="amount-btn" data-amount="25">$25</button>
+                            <button class="amount-btn" data-amount="50">$50</button>
+                            <button class="amount-btn" data-amount="100">$100</button>
+                        </div>
+                        <div class="custom-amount">
+                            <label for="paypal-amount">O ingresa tu monto:</label>
+                            <div class="amount-input-group">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="paypal-amount" class="amount-input" placeholder="0.00" min="1" step="0.01">
+                            </div>
+                        </div>
+                        <button class="donate-btn" data-platform="paypal">
+                            <i class="fas fa-heart"></i>
+                            Donar con PayPal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MercadoPago Card -->
+                <div class="donation-card">
+                    <div class="donation-header">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>MercadoPago</h3>
+                    </div>
+                    <div class="donation-body">
+                        <p>Dona desde Argentina y Latinoamérica</p>
+                        <div class="amount-selector">
+                            <button class="amount-btn" data-amount="500">$500</button>
+                            <button class="amount-btn" data-amount="1000">$1000</button>
+                            <button class="amount-btn" data-amount="2500">$2500</button>
+                            <button class="amount-btn" data-amount="5000">$5000</button>
+                        </div>
+                        <div class="custom-amount">
+                            <label for="mercadopago-amount">O ingresa tu monto:</label>
+                            <div class="amount-input-group">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="mercadopago-amount" class="amount-input" placeholder="0.00" min="1" step="0.01">
+                            </div>
+                        </div>
+                        <button class="donate-btn" data-platform="mercadopago">
+                            <i class="fas fa-heart"></i>
+                            Donar con MercadoPago
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="donation-info-section">
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguro</h3>
+                    <p>Todas las donaciones se procesan de forma segura a través de plataformas confiables</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Transparente</h3>
+                    <p>Los fondos se utilizan para mejorar servidores, eventos y premios para la comunidad</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Comunidad</h3>
+                    <p>Tu apoyo ayuda a que YAG3R siga creciendo y conectando gamers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Donación -->
+    <div id="donation-modal" class="donation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Procesando Donación</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="donation-info">
+                    <p>Plataforma: <span id="donation-platform"></span></p>
+                    <p>Monto: <span id="donation-amount"></span></p>
+                </div>
+                <div class="donation-status">
+                    <div class="loading-spinner"></div>
+                    <p>Redirigiendo a la plataforma de pago...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>YAG3R</h3>
+                    <p>La mejor comunidad gaming para conectar con jugadores de todo el mundo.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#acerca">Acerca</a></li>
+                        <li><a href="index.html#juegos">Juegos</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" id="discordFooter"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 YAG3R Community. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

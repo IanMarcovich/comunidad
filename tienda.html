@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda YAG3R - Próximamente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #8b5cf6;
+            --secondary-purple: #a855f7;
+            --light-purple: #c084fc;
+            --dark-purple: #7c3aed;
+            --purple-glow: rgba(139, 92, 246, 0.5);
+            --purple-light-glow: rgba(192, 132, 252, 0.3);
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coming-soon-container {
+            text-align: center;
+            animation: containerPulse 3s ease-in-out infinite;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-purple), var(--light-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px var(--purple-glow);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        .store-icon {
+            font-size: 4rem;
+            color: var(--primary-purple);
+            margin: 30px 0;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        .main-text {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--light-purple);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 30px auto;
+            border: 4px solid rgba(139, 92, 246, 0.1);
+            border-left: 4px solid var(--primary-purple);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px var(--purple-glow);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--purple-glow);
+            background: linear-gradient(45deg, var(--secondary-purple), var(--light-purple));
+        }
+
+        /* Animaciones */
+        @keyframes logoGlow {
+            0% { 
+                text-shadow: 0 0 30px var(--purple-glow);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 50px var(--purple-glow), 0 0 80px var(--purple-glow);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes containerPulse {
+            0%, 100% { 
+                transform: translateY(0px);
+                opacity: 0.95;
+            }
+            50% { 
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 4rem;
+            }
+            
+            .main-text {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .store-icon {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 3rem;
+            }
+            
+            .main-text {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .store-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary-purple);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fondo -->
+    <div class="particles"></div>
+
+    <div class="coming-soon-container">
+        <div class="logo">
+            <h1>YAG3R</h1>
+        </div>
+        
+        <div class="store-icon">
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+        
+        <h2 class="main-text">TIENDA</h2>
+        <p class="subtitle">Próximamente podrás adquirir productos exclusivos de la comunidad</p>
+        
+        <div class="spinner"></div>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Volver al Inicio
+        </a>
+    </div>
+
+    <script>
+        // Crear partículas de fondo
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Posición horizontal aleatoria
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Delay aleatorio para la animación
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                // Duración aleatoria
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Inicializar partículas cuando se cargue la página
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        // Easter egg - doble click en el logo
+        document.querySelector('.logo h1').addEventListener('dblclick', function() {
+            this.style.animation = 'logoGlow 0.5s ease infinite';
+            setTimeout(() => {
+                this.style.animation = 'logoGlow 2s ease-in-out infinite alternate';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
