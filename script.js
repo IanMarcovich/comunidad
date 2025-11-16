@@ -2,7 +2,7 @@
 // Script principal para la funcionalidad de la página
 
 // === CONFIGURACIÓN DISCORD ===
-const DISCORD_INVITE_URL = 'https://discord.gg/your-invite-code';
+const DISCORD_INVITE_URL = 'https://discord.gg/4b84j9wc8S';
 
 // === CONFIGURACIÓN STREAMERS ===
 const STREAMERS_CONFIG = {
