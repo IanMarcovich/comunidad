@@ -1146,12 +1146,6 @@ body {
     cursor: pointer;
 }
 
-/* Responsive Design para Music Player */
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-    z-index: 1;
-}
 
 .pulse-ring-2 {
     animation-delay: 1s;
