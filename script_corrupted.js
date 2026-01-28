@@ -1,3 +1,4 @@
+
 // Configuración del enlace de Discord
 const DISCORD_INVITE_URL = 'https://discord.gg/tu-enlace-aqui'; // Cambia esto por tu enlace real de Discord
 
