@@ -1692,10 +1692,11 @@ body {
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1));
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: 20px;
-    padding: 60px 40px;
+    padding: 40px 30px;
     text-align: center;
     max-width: 600px;
     width: 100%;
+    margin: 0 auto;
     transition: all 0.3s ease;
 }
 
@@ -1706,24 +1707,24 @@ body {
 }
 
 .donation-preview i {
-    font-size: 4rem;
+    font-size: 2.5rem;
     color: var(--accent-color);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     animation: heartbeat 2s ease-in-out infinite;
 }
 
 .donation-preview h3 {
     color: #fff;
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
     font-family: 'Orbitron', monospace;
 }
 
 .donation-preview p {
     color: #ccc;
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .donations-btn {
@@ -1811,6 +1812,12 @@ body {
 .donation-card .donate-btn {
     margin-top: 20px;
     align-self: flex-start;
+    background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+}
+
+.donation-card .donate-btn:hover {
+    background: linear-gradient(45deg, var(--secondary-purple), var(--light-purple));
 }
 
 /* Center PayPal button specifically */
@@ -1963,6 +1970,18 @@ body {
     font-size: 1.1rem;
     transition: all 0.3s ease;
     margin-top: 10px;
+    background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.donate-btn:hover {
+    background: linear-gradient(45deg, var(--secondary-purple), var(--light-purple));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+    color: white;
 }
 
 .paypal-btn {
@@ -1987,6 +2006,31 @@ body {
     background: linear-gradient(45deg, #0097a7, #00acc1);
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(0, 184, 212, 0.5);
+}
+
+/* Botón de enlace a donaciones en el index */
+.donations-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 0;
+    background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
+    cursor: pointer;
+}
+
+.donations-link:hover {
+    background: linear-gradient(45deg, var(--secondary-purple), var(--light-purple));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+    color: white;
 }
 
 /* Modal de Donación */

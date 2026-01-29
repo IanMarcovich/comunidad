@@ -383,32 +383,24 @@ function initDonations() {
     // Manejar botones de donación
     donateButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.preventDefault();
             const platform = btn.getAttribute('data-platform');
-            const directUrl = btn.getAttribute('data-direct-url');
-            const amount = selectedAmounts[platform];
             
             if (platform === 'sponsor') {
+                e.preventDefault();
                 // Abrir formulario de sponsorship
                 openSponsorForm();
                 return;
             }
 
-            // Si el botón tiene un enlace directo (p.ej. PayPal), abrirlo directamente.
-            // Intentamos abrir en nueva pestaña; si el popup es bloqueado, navegamos en la misma pestaña como fallback.
-            if (platform === 'paypal' && directUrl) {
-                const newWindow = window.open(directUrl, '_blank');
-                try {
-                    // Si el navegador bloqueó la nueva ventana, newWindow será null.
-                    if (!newWindow) {
-                        window.location.href = directUrl;
-                    }
-                } catch (err) {
-                    // En caso de error, fallback a navegación en la misma pestaña
-                    window.location.href = directUrl;
-                }
+            if (platform === 'paypal') {
+                e.preventDefault();
+                // Abrir enlace de PayPal en nueva pestaña
+                window.open('https://www.paypal.com/donate/?hosted_button_id=TUWM6GVGHJRBG', '_blank');
                 return;
             }
+
+            e.preventDefault();
+            const amount = selectedAmounts[platform];
 
             if (!amount || amount <= 0) {
                 alert('Por favor selecciona un monto válido antes de continuar');
