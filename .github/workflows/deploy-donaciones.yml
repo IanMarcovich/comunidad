@@ -1,0 +1,36 @@
+name: Deploy Donaciones Page
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  deploy-donaciones:
+    runs-on: ubuntu-latest
+    name: Deploy donaciones.html to gh-pages
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare deploy directory
+        run: |
+          rm -rf .deploy
+          mkdir -p .deploy
+          # Use donaciones.html as the site index
+          cp donaciones.html .deploy/index.html
+          # Copy assets that might be referenced (styles, scripts, images)
+          if [ -d "styles.css" ] || [ -f "styles.css" ]; then cp -r styles.css .deploy/ || true; fi
+          cp -r styles.css .deploy/ || true
+          cp -r script.js .deploy/ || true
+          # copy favicon if present
+          cp -r YAG3R_Gaming.ico .deploy/ || true
+
+      - name: Deploy to GitHub Pages (gh-pages)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.deploy
+          # Set the custom domain for this published site
+          cname: donaciones.yag3r.cm

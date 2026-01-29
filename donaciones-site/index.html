@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="YAG3R_Gaming.ico?v=1">
     <meta name="theme-color" content="#7a4bc9">
     
+    <!-- Nota: añade `styles.css` y `script.js` en este mismo folder o ajusta los enlaces -->
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="loading">
+    <!-- Contenido copiado (versión independiente). Mantén los assets en el mismo folder. -->
     <!-- Pantalla de Carga -->
     <div id="page-loader" class="page-loader">
         <div class="loader-content">
@@ -144,78 +146,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal de Donación -->
-    <div id="donation-modal" class="donation-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Procesando Donación</h3>
-                <button class="modal-close" id="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="donation-info">
-                    <p>Plataforma: <span id="donation-platform"></span></p>
-                    <p>Monto: <span id="donation-amount"></span></p>
-                </div>
-                <div class="donation-status">
-                    <div class="loading-spinner"></div>
-                    <p>Redirigiendo a la plataforma de pago...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Sponsor -->
-    <div id="sponsorModal" class="donation-modal" style="display:none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>🎮 Convertite en Sponsor Oficial de YAG3R</h3>
-                <button class="modal-close" onclick="closeSponsorForm()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Gracias por tu interés en apoyar YAG3R.<br>
-                Con una donación única de <strong>350 USD</strong>, podés convertirte en Sponsor Oficial por 1 año y obtener beneficios exclusivos de visibilidad y colaboración con nuestra comunidad.</p>
-
-                <h4>💎 Beneficios del Sponsorship</h4>
-                <ul>
-                    <li>Logo o nombre de tu marca en nuestras redes y contenidos</li>
-                    <li>Menciones en streams, videos y publicaciones</li>
-                    <li>Espacio promocional en nuestra camiseta</li>
-                    <li>Reconocimiento como Sponsor Oficial de YAG3R</li>
-                </ul>
-
-                <hr>
-
-                <form id="sponsorForm" onsubmit="sendSponsorApplication(event)">
-                    <div class="form-group">
-                        <label for="sponsorName">Nombre de contacto *</label>
-                        <input type="text" id="sponsorName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sponsorCompany">Empresa / Marca</label>
-                        <input type="text" id="sponsorCompany" name="company">
-                    </div>
-                    <div class="form-group">
-                        <label for="sponsorWhatsapp">Número de WhatsApp</label>
-                        <input type="tel" id="sponsorWhatsapp" name="whatsapp" placeholder="+54 9 11 1234-5678">
-                    </div>
-                    <div class="form-group">
-                        <label for="sponsorEmail">Email *</label>
-                        <input type="email" id="sponsorEmail" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sponsorMessage">Mensaje (opcional)</label>
-                        <textarea id="sponsorMessage" name="message" rows="4"></textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <button type="button" class="btn-cancel" onclick="closeSponsorForm()">Cancelar</button>
-                        <button type="submit" class="btn-submit">Enviar Solicitud</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">

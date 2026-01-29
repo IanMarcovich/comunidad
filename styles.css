@@ -1757,12 +1757,27 @@ body {
 
 .donations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     margin: 50px 0;
-    max-width: 800px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+    .donations-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 640px) {
+    .donations-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        gap: 20px;
+    }
 }
 
 .donation-card {
@@ -1778,6 +1793,29 @@ body {
 .donation-card:hover {
     border-color: var(--primary-purple);
     box-shadow: 0 10px 30px var(--purple-light-glow);
+}
+
+/* Ensure buttons align at bottom and cards have consistent height */
+.donation-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.donation-card .donation-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.donation-card .donate-btn {
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+/* Center PayPal button specifically */
+.donation-card .donate-btn.center-btn {
+    align-self: center;
 }
 
 .donation-card::before {
@@ -1976,6 +2014,8 @@ body {
     padding: 30px;
     max-width: 500px;
     width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
     border: 1px solid rgba(139, 92, 246, 0.3);
     animation: slideIn 0.3s ease;
 }

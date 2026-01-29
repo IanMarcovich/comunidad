@@ -385,15 +385,38 @@ function initDonations() {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const platform = btn.getAttribute('data-platform');
+            const directUrl = btn.getAttribute('data-direct-url');
             const amount = selectedAmounts[platform];
             
+            if (platform === 'sponsor') {
+                // Abrir formulario de sponsorship
+                openSponsorForm();
+                return;
+            }
+
+            // Si el botón tiene un enlace directo (p.ej. PayPal), abrirlo directamente.
+            // Intentamos abrir en nueva pestaña; si el popup es bloqueado, navegamos en la misma pestaña como fallback.
+            if (platform === 'paypal' && directUrl) {
+                const newWindow = window.open(directUrl, '_blank');
+                try {
+                    // Si el navegador bloqueó la nueva ventana, newWindow será null.
+                    if (!newWindow) {
+                        window.location.href = directUrl;
+                    }
+                } catch (err) {
+                    // En caso de error, fallback a navegación en la misma pestaña
+                    window.location.href = directUrl;
+                }
+                return;
+            }
+
             if (!amount || amount <= 0) {
                 alert('Por favor selecciona un monto válido antes de continuar');
                 return;
             }
-            
+
             console.log(`🎯 Procesando donación ${platform}:`, amount);
-            
+
             // Mostrar modal de procesamiento y redirigir
             showDonationProcess(platform, amount, () => {
                 if (platform === 'paypal') {
@@ -782,6 +805,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Sponsor modal functions
+function openSponsorForm() {
+    const modal = document.getElementById('sponsorModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => modal.classList.add('show'), 10);
+    console.log('📝 Formulario de sponsor abierto');
+}
+
+function closeSponsorForm() {
+    const modal = document.getElementById('sponsorModal');
+    if (!modal) return;
+    modal.classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300);
+    console.log('❌ Formulario de sponsor cerrado');
+}
+
+// Cerrar sponsor modal al hacer clic fuera
+document.addEventListener('DOMContentLoaded', function() {
+    const sponsorModal = document.getElementById('sponsorModal');
+    if (!sponsorModal) return;
+    sponsorModal.addEventListener('click', function(e) {
+        if (e.target === sponsorModal) {
+            closeSponsorForm();
+        }
+    });
+});
+
+function sendSponsorApplication(event) {
+    event.preventDefault();
+    const form = document.getElementById('sponsorForm');
+    const formData = new FormData(form);
+
+    const name = formData.get('name') || 'No proporcionado';
+    const company = formData.get('company') || 'No proporcionado';
+    const whatsapp = formData.get('whatsapp') || 'No proporcionado';
+    const email = formData.get('email') || 'No proporcionado';
+    const message = formData.get('message') || '';
+
+
+    const subject = 'Interés en Sponsorship - YAG3R';
+    const body = `Hola YAG3R Team,%0D%0A%0D%0AQuiero ser Sponsor Oficial de YAG3R.%0D%0A%0D%0ANombre de contacto: ${name}%0D%0AEmpresa/Marca: ${company}%0D%0AWhatsApp: ${whatsapp}%0D%0AEmail: ${email}%0D%0AMensaje:%0D%0A${message}%0D%0A%0D%0AEstoy interesado en la opción de Sponsorship: Donación única de 350 USD por 1 año.%0D%0A%0D%0AGracias!`;
+
+    const mailto = `mailto:yag3rgaming@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+    // Avisar al usuario que debe adjuntar el comprobante de pago
+    alert('Se abrirá tu cliente de correo. Por favor, ADJUNTA el comprobante de pago (imagen o PDF) antes de enviar el email.');
+
+    // Abrir cliente de email
+    window.open(mailto);
+
+    // Mostrar confirmación en el modal
+    const modal = document.getElementById('sponsorModal');
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.innerHTML = `
+        <div class="success-message">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Solicitud Enviada</h3>
+            <p>Se abrió tu cliente de email con los datos. Adjunta el comprobante de pago si corresponde y presiona enviar para completar la solicitud.</p>
+            <button onclick="closeSponsorForm()" class="btn-success">Cerrar</button>
+        </div>
+    `;
+
+    console.log('📧 Formulario de sponsor preparado para envío por email');
+}
 
 // Función para enviar aplicación por email
 function sendStreamerApplication(event) {
