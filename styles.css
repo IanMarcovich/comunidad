@@ -271,6 +271,19 @@ body {
     padding: 0 20px;
 }
 
+.logo-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo-img {
+    height: 6rem;
+    width: auto;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 20px var(--purple-glow));
+}
+
 .logo-hero .logo-text {
     font-family: 'Orbitron', monospace;
     font-size: clamp(3rem, 8vw, 6rem);
