@@ -3,44 +3,57 @@ const products = [
     {
         id: 1,
         name: 'Remera YAG3R Premium',
-        description: 'Remera de algodón 100% con logo bordado',
-        price: 49.99,
-        image: 'tienda_imagenes/camiseta_yag3r_design.jpg'
+        description: 'Remera de algodón 100% con logo bordado. Confeccionada en 100% algodón de alta calidad, perfecta para gaming.',
+        price: 59000,
+        images: ['tienda_imagenes/modelo_camiseta_yag3r.png', 'tienda_imagenes/camiseta_delante_yag3r.png', 'tienda_imagenes/camiseta_reverso_yag3r.png', 'tienda_imagenes/camisetas_dobles_yag3r.jpg']
     },
     {
         id: 2,
-        name: 'Gorra Snapback',
-        description: 'Gorra ajustable con logo 3D',
-        price: 29.99,
-        image: 'https://images.unsplash.com/photo-1562368578-7fcab1014266?w=400&h=300&fit=crop'
+        name: 'Gorra YAG3R',
+        description: 'Gorra ajustable con logo 3D. Diseño clásico con cierre ajustable.',
+        price: 30000,
+        images: [
+            'tienda_imagenes/gorra_yag3r.png',
+            
+        ]
     },
     {
         id: 3,
         name: 'Mousepad XL',
-        description: 'Mousepad gaming de 90x40 cm',
-        price: 34.99,
-        image: 'tienda_imagenes/BANNER.png'
+        description: 'Mousepad gaming de 90x40 cm. Base antideslizante y superficie optimizada para precisión.',
+        price: 34000,
+        images: [
+            'tienda_imagenes/mousepad_Xl.png'
+        ]
     },
     {
         id: 4,
         name: 'Sticker Pack',
-        description: 'Pack de 10 stickers exclusivos',
-        price: 9.99,
-        image: 'https://images.unsplash.com/photo-1578633769828-5a83mobi7988?w=400&h=300&fit=crop'
+        description: 'Pack de 10 stickers exclusivos. Stickers de vinilo de alta calidad, resistentes al agua.',
+        price: 10000,
+        images: [
+            'tienda_imagenes/stickers.png'
+        ]
     },
     {
         id: 5,
         name: 'Botella Térmica',
-        description: 'Botella de acero inoxidable 500ml',
+        description: 'Botella de acero inoxidable 500ml. Mantiene bebidas frías o calientes durante horas.',
         price: 39.99,
-        image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop'
+        images: [
+            'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=500&fit=crop'
+        ]
     },
     {
         id: 6,
         name: 'Taza Gaming',
-        description: 'Taza cerámica con diseño exclusivo',
+        description: 'Taza cerámica con diseño exclusivo. Perfecta para café, té o cualquier bebida caliente.',
         price: 19.99,
-        image: 'https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=400&h=300&fit=crop'
+        images: [
+            'https://images.unsplash.com/photo-1514432324607-2e467f4af445?w=600&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=500&fit=crop'
+        ]
     }
 ];
 
@@ -51,16 +64,16 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function renderProducts() {
     const grid = document.getElementById('productsGrid');
     grid.innerHTML = products.map(product => `
-        <div class="product-card">
+        <div class="product-card" onclick="openProductModal(${product.id})">
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
             </div>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
-                <div class="product-description">${product.description}</div>
+                <div class="product-description">${product.description.substring(0, 50)}...</div>
                 <div class="product-footer">
                     <div class="product-price">$${product.price.toFixed(2)}</div>
-                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                    <button class="add-to-cart-btn" onclick="addToCart(${product.id}); event.stopPropagation();">
                         <i class="fas fa-plus"></i> Añadir
                     </button>
                 </div>
@@ -220,6 +233,88 @@ function closeCart() {
     document.getElementById('cartModal').classList.remove('active');
 }
 
+// Variables globales para el modal del producto
+let currentProductId = null;
+let currentImageIndex = 0;
+
+// Abrir modal del producto
+function openProductModal(productId) {
+    currentProductId = productId;
+    currentImageIndex = 0;
+    
+    const product = products.find(p => p.id === productId);
+    const modal = document.getElementById('productModal');
+    
+    document.getElementById('modalProductName').textContent = product.name;
+    document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
+    document.getElementById('modalProductDescription').textContent = product.description;
+    document.getElementById('modalProductImage').src = product.images[0];
+    
+    // Mostrar indicadores de imágenes
+    const indicators = document.getElementById('imageIndicators');
+    indicators.innerHTML = product.images.map((_, index) => `
+        <span class="indicator ${index === 0 ? 'active' : ''}" onclick="selectImage(${index})"></span>
+    `).join('');
+    
+    // Mostrar/ocultar botones de navegación
+    const prevBtn = document.getElementById('prevImageBtn');
+    const nextBtn = document.getElementById('nextImageBtn');
+    
+    if (product.images.length <= 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    } else {
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'block';
+    }
+    
+    modal.classList.add('active');
+}
+
+// Cerrar modal del producto
+function closeProductModal() {
+    document.getElementById('productModal').classList.remove('active');
+    currentProductId = null;
+    currentImageIndex = 0;
+}
+
+// Cambiar imagen anterior
+function prevImage() {
+    const product = products.find(p => p.id === currentProductId);
+    currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
+    updateProductImage(product);
+}
+
+// Cambiar imagen siguiente
+function nextImage() {
+    const product = products.find(p => p.id === currentProductId);
+    currentImageIndex = (currentImageIndex + 1) % product.images.length;
+    updateProductImage(product);
+}
+
+// Seleccionar imagen por índice
+function selectImage(index) {
+    const product = products.find(p => p.id === currentProductId);
+    currentImageIndex = index;
+    updateProductImage(product);
+}
+
+// Actualizar la imagen mostrada
+function updateProductImage(product) {
+    document.getElementById('modalProductImage').src = product.images[currentImageIndex];
+    
+    // Actualizar indicadores
+    document.querySelectorAll('.indicator').forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentImageIndex);
+    });
+}
+
+// Agregar producto al carrito desde el modal
+function addToCartFromModal() {
+    addToCart(currentProductId);
+    closeProductModal();
+}
+
 // Inicializar la tienda cuando se carga el DOM
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
@@ -233,6 +328,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cartModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('cartModal')) {
             closeCart();
+        }
+    });
+
+    // Event listener para cerrar modal del producto al clickear fuera
+    document.getElementById('productModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('productModal')) {
+            closeProductModal();
         }
     });
 

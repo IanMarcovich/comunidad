@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -394,6 +395,208 @@
             color: #ccc;
         }
 
+        /* Estilos para el modal del producto */
+        #productModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #productModal.active {
+            display: flex;
+        }
+
+        .product-modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid var(--primary-purple);
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 850px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 25px;
+        }
+
+        .product-modal-image-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #modalProductImage {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 15px;
+            border: 1px solid var(--primary-purple);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .image-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-btn {
+            background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px var(--purple-glow);
+        }
+
+        .image-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #imageIndicators {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .indicator.active {
+            background: var(--primary-purple);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .product-modal-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .modal-product-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--light-purple);
+            margin-bottom: 10px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .modal-product-price {
+            font-size: 2.2rem;
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .modal-product-description {
+            font-size: 1rem;
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .modal-product-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .qty-input-modal {
+            flex: 1;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--primary-purple);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .add-cart-modal-btn {
+            width: 100%;
+            background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-cart-modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px var(--purple-glow);
+        }
+
+        .close-product-modal-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .close-product-modal-btn:hover {
+            color: var(--light-purple);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .product-modal-content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            #modalProductImage {
+                height: 400px;
+            }
+
+            .modal-product-name {
+                font-size: 1.5rem;
+            }
+
+            .modal-product-price {
+                font-size: 2rem;
+            }
+        }
+
         .particles {
             position: fixed;
             top: 0;
@@ -463,7 +666,7 @@
                 Carrito
                 <span class="cart-count" id="cartCount">0</span>
             </button>
-            <a href="https://web.yag3r.com" class="back-btn">
+            <a href="index.html" class="back-btn">
                 <i class="fas fa-arrow-left"></i>
                 Inicio
             </a>
@@ -487,6 +690,61 @@
         </div>
     </div>
 
+    <!-- Modal del Producto -->
+    <div id="productModal">
+        <div class="product-modal-content">
+            <div class="product-modal-image-container">
+                <img id="modalProductImage" src="" alt="Producto">
+                <div class="image-controls">
+                    <button class="image-btn" id="prevImageBtn" onclick="prevImage()" title="Imagen anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="image-btn" id="nextImageBtn" onclick="nextImage()" title="Siguiente imagen">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="imageIndicators"></div>
+            </div>
+
+            <div class="product-modal-info">
+                <button class="close-product-modal-btn" onclick="closeProductModal()">×</button>
+                <div>
+                    <h2 class="modal-product-name" id="modalProductName"></h2>
+                    <div class="modal-product-price" id="modalProductPrice"></div>
+                    <p class="modal-product-description" id="modalProductDescription"></p>
+                </div>
+                <button class="add-cart-modal-btn" onclick="addToCartFromModal()">
+                    <i class="fas fa-shopping-cart"></i> Añadir al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>YAG3R</h3>
+                    <p>La mejor comunidad gaming para conectar con jugadores de todo el mundo.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/4b84j9wc8S" target="_blank" id="discordFooter"><i class="fab fa-discord"></i></a>
+                        <a href="https://x.com/YAG3RGaming" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yag3r.ygr/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.twitch.tv/yag3rgaming" target="_blank"><i class="fab fa-twitch"></i></a>
+                        <a href="https://www.tiktok.com/@yag3rgaming" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://kick.com/yag3rgaming" target="_blank" title="Kick"><span class="kick-icon">K</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 YAG3RGAMING. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
     <script src="tienda.js"></script>
 </body>
 </html>

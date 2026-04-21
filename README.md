@@ -11,7 +11,7 @@
 - `CNAME` - Configuración dominio personalizado
 
 ## 🛠️ Features
-- ✅ Navegación responsive con menú hamburguesa
+- ✅ Navegación responsive con menú
 - ✅ Integración Spotify
 - ✅ Enlaces Discord actualizados
 - ✅ Animaciones y contadores
